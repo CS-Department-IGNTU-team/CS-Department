@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSDepartment.Api.Services
 {
-    interface IPost
+    interface IPostRepository
     {
         Task<IEnumerable<Post>> GetPosts();
         Task<Post> GetPost();

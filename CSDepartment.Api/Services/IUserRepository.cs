@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSDepartment.Api.Services
 {
-    interface IUser
+    interface IUserRepository
     {
         Task<IEnumerable<User>> GetUsers();
         Task<User> GetUser();
