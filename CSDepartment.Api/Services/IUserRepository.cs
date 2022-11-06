@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace CSDepartment.Api.Services
 {
-    interface IUserRepository
+    public interface IUserRepository
     {
         Task<IEnumerable<User>> GetUsers();
-        Task<User> GetUser();
-        Task<User> AddUser();
-        Task<User> UpdateUser();
+        Task<User> GetUser(string Username);
+        Task<User> AddUser(User user);
+        Task<User> UpdateUser(User user);
         void DeleteUser(string Username);
     }
 }

@@ -28,7 +28,7 @@ namespace CSDepartment.Api
                     Role = "Administrator",
                     Username = "admin",
                     Password = "4321",
-                    Email = "prabhakarishu5695@gmail.com",
+                    Email = "mrunpredictable3679@gmail.com",
                     Rights = new Rights() { CanDelete = true, CanModify = true, CanPost = true, CanWrite = true },
                 });
         }

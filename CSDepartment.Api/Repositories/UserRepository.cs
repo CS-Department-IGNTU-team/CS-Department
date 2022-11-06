@@ -1,5 +1,6 @@
 ﻿using CSDepartment.Api.Services;
 using CSDepartment.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,35 +12,53 @@ namespace CSDepartment.Api.Repositories
     {
         // Constructor Dependency injection
         private readonly AppDBContext appDBContext;
-
         public UserRepository(AppDBContext appDBContext)
         {
             this.appDBContext = appDBContext;
         }
 
-        public Task<User> AddUser()
+        public async Task<User> AddUser(User user)
         {
-            throw new NotImplementedException();
+            var result = await appDBContext.Users.AddAsync(user);
+            await appDBContext.SaveChangesAsync();
+            return result.Entity;
         }
 
-        public void DeleteUser(string Username)
+        public async void DeleteUser(string Username)
         {
-            throw new NotImplementedException();
+            var result = await appDBContext.Users.FirstOrDefaultAsync(e => e.Username == Username);
+            if (result != null)
+            {
+                appDBContext.Users.Remove(result);
+                await appDBContext.SaveChangesAsync();
+            }
         }
 
-        public Task<User> GetUser()
+        public async Task<User> GetUser(string Username)
         {
-            throw new NotImplementedException();
+            return await appDBContext.Users.FirstOrDefaultAsync(e => e.Username == Username);
         }
 
-        public  Task<IEnumerable<User>> GetUsers()
+        public async Task<IEnumerable<User>> GetUsers()
         {
-            return appDBContext.Users.ToList();
+            return await appDBContext.Users.ToListAsync();
         }
 
-        public Task<User> UpdateUser()
+        public async Task<User> UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            var result = await appDBContext.Users.FirstOrDefaultAsync(e => e.Username == user.Username);
+
+            if (result != null)
+            {
+                result.Name = user.Username;
+                result.Role = user.Role;
+                result.Password = user.Password;
+                result.Email = user.Password;
+            }
+
+            await appDBContext.SaveChangesAsync();
+
+            return result;
         }
     }
 }
