@@ -26,9 +26,9 @@ namespace CSDepartment.Api.Controllers
             {
                 return Ok(await userRepository.GetUsers());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
         }
     }
